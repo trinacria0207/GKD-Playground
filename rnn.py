@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 import json
 import time
-import tf.keras.backend as K
+import tensorflow.keras.backend as K
 
 print("Number of GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
 
