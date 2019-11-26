@@ -89,33 +89,33 @@ def test(model, test_inputs, test_labels):
 
 
 def main():
-    # vocab_fp = 'vocab.json'
+    vocab_fp = 'vocab.json'
     train_data_fp = 'train_data.npy'
-    train_labels_fp = 'train_labels.npy'
-    # test_data_fp = 'test_data.npy'
-    # test_labels_fp = 'test_labels.npy'
+    train_labels_fp = 'train_label.npy'
+    test_data_fp = 'test_data.npy'
+    test_labels_fp = 'test_labels.npy'
     test_data_fp = 'train_data.npy'
-    test_labels_fp = 'train_labels.npy'
-    # with open(vocab_fp) as f:
-    #     vocab = json.load(f)
-    train_data = np.load(train_data_fp) #(N, window, 2)
-    train_labels = np.load(train_labels_fp) #(N,)
-    test_data = np.load(test_data_fp)
-    test_labels = np.load(test_labels_fp)
+    test_labels_fp = 'train_label.npy'
+    with open(vocab_fp) as f:
+        vocab = json.load(f)
+    train_data = np.load(train_data_fp).astype(np.int32) #(N, window, 2)
+    train_labels = np.load(train_labels_fp).astype(np.int32) #(N,)
+    test_data = np.load(test_data_fp).astype(np.int32)
+    test_labels = np.load(test_labels_fp).astype(np.int32)
     print('train data: ', train_data.shape)
     print('train labels: ', train_labels.shape)
     print('test data: ', test_data.shape)
     print('test labels: ', test_labels.shape)
     
-    # model = Model(len(vocab))
-    model = Model(10)
+    model = Model(len(vocab))
+    # model = Model(10)
 
     start = time.time()
     train(model, train_data, train_labels)
     print('Training process takes %.4f minutes' % ((time.time()-start)/60))
 
     accuracy = test(model, test_data, test_labels) 
-    # print(accuracy)
+    print(accuracy)
     
 if __name__ == '__main__':
     main()

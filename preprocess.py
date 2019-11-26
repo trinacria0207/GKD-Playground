@@ -7,12 +7,13 @@ train = pd.read_csv("train.csv")
 train_data = [] 
 label = []
 #print(train['question1'][0])
-
+#n = len(train['question1'])
+n = 1000
 #print(train_data.shape)
 train_words = []
 train_ = []
 max_len = 0
-for i in range(100):
+for i in range(n):
 #    train_data.append([train['question1'][i],train['question2'][i]])
     sen1 = re.split('\W',train['question1'][i])
     sen2 = re.split('\W',train['question2'][i])
@@ -23,6 +24,7 @@ for i in range(100):
     
 vocab= set(train_words)
 word2id = {w: i+1 for i, w in enumerate(list(vocab))}
+word2id['UNK'] = 0
 # pad = 0
 
 data_numpy = np.zeros((len(train_), max_len, 2))
@@ -32,10 +34,11 @@ for i in range(len(train_)):
             data_numpy[i,k,j] = word2id[word]
 print(data_numpy.shape)
 data_label = np.array(label)
-train_data = data_numpy[:80]
-test_data = data_numpy[80:]
-train_label = data_label[:80]
-test_label = data_label[:80]
+train_data = data_numpy[:int(n*0.8)]
+test_data = data_numpy[int(n*0.8):]
+
+train_label = data_label[:int(n*0.8)]
+test_label = data_label[int(n*0.8):]
 
 np.save('train_data', train_data)
 np.save('train_label', train_label)
