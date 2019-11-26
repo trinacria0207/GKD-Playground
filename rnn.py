@@ -1,9 +1,11 @@
+from __future__ import absolute_import, division, print_function, unicode_literals
 from sklearn.metrics import f1_score
 import tensorflow as tf
 import numpy as np
 import json
 import time
 
+print("Number of GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
 
 class Model(tf.keras.Model):
     def __init__(self, vocab_size):
