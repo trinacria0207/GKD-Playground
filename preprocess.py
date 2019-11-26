@@ -37,8 +37,13 @@ data_label = np.array(label)
 train_data = data_numpy[:int(n*0.8)]
 test_data = data_numpy[int(n*0.8):]
 
+
 train_label = data_label[:int(n*0.8)]
 test_label = data_label[int(n*0.8):]
+print('train data shape: ', train_data.shape)
+print('train label shape: ', train_label.shape)
+print('test data shape: ', test_data.shape)
+print('test label shape: ', test_label.shape)
 
 np.save('train_data', train_data)
 np.save('train_label', train_label)

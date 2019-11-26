@@ -92,10 +92,9 @@ def main():
     vocab_fp = 'vocab.json'
     train_data_fp = 'train_data.npy'
     train_labels_fp = 'train_label.npy'
+
     test_data_fp = 'test_data.npy'
-    test_labels_fp = 'test_labels.npy'
-    test_data_fp = 'train_data.npy'
-    test_labels_fp = 'train_label.npy'
+    test_labels_fp = 'test_label.npy'
     with open(vocab_fp) as f:
         vocab = json.load(f)
     train_data = np.load(train_data_fp).astype(np.int32) #(N, window, 2)
