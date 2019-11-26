@@ -1,9 +1,9 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
-from sklearn.metrics import f1_score
 import tensorflow as tf
 import numpy as np
 import json
 import time
+import tf.keras.backend as K
 
 print("Number of GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
 
@@ -80,13 +80,16 @@ def test(model, test_inputs, test_labels):
     # print(test_labels)
     logits = model.call(test_inputs)
     pred = tf.argmax(logits, axis=1)
-    f1 = f1_score(pred, test_labels)
+    f1 = f1_score(test_labels, pred)
     result = tf.dtypes.cast(tf.math.equal(pred, test_labels), tf.float32)
     accuracy = tf.reduce_mean(result)
     print('Acc:', accuracy.numpy())
     print('F1 Score:', f1)
     # return accuracy
-
+def f1_score(y_true, y_pred):
+    y_true = tf.dtypes.cast(K.flatten(y_true), tf.float64)
+    y_pred = tf.dtypes.cast(K.flatten(y_pred), tf.float64)
+    return 2*(K.sum(y_true * y_pred)+K.epsilon()) / (K.sum(y_true) + K.sum(y_pred) + K.epsilon())
 
 def main():
     vocab_fp = 'vocab.json'
