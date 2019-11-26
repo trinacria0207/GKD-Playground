@@ -8,7 +8,7 @@ train_data = []
 label = []
 #print(train['question1'][0])
 #n = len(train['question1'])
-n = 1000
+n = 10000
 #print(train_data.shape)
 train_words = []
 train_ = []
