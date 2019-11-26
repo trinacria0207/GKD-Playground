@@ -24,7 +24,7 @@ class Model(tf.keras.Model):
         self.gru_layer = tf.keras.layers.GRU(128, return_sequences=False, return_state=True)
         self.dense = tf.keras.layers.Dense(2, activation='softmax')
 
-        self.optimizer = tf.keras.optimizers.Adam(0.01)
+        self.optimizer = tf.keras.optimizers.Adam(0.001)
 
 
     def call(self, inputs, initial_state=None):
