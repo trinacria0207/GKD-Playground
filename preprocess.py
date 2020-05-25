@@ -7,13 +7,12 @@ train = pd.read_csv("train.csv")
 train_data = [] 
 label = []
 #print(train['question1'][0])
-#n = len(train['question1'])
-n = 10000
+
 #print(train_data.shape)
 train_words = []
 train_ = []
 max_len = 0
-for i in range(n):
+for i in range(10000):
 #    train_data.append([train['question1'][i],train['question2'][i]])
     sen1 = re.split('\W',train['question1'][i])
     sen2 = re.split('\W',train['question2'][i])
@@ -34,16 +33,10 @@ for i in range(len(train_)):
             data_numpy[i,k,j] = word2id[word]
 print(data_numpy.shape)
 data_label = np.array(label)
-train_data = data_numpy[:int(n*0.8)]
-test_data = data_numpy[int(n*0.8):]
-
-
-train_label = data_label[:int(n*0.8)]
-test_label = data_label[int(n*0.8):]
-print('train data shape: ', train_data.shape)
-print('train label shape: ', train_label.shape)
-print('test data shape: ', test_data.shape)
-print('test label shape: ', test_label.shape)
+train_data = data_numpy[:8000]
+test_data = data_numpy[8000:]
+train_label = data_label[:8000]
+test_label = data_label[:8000]
 
 np.save('train_data', train_data)
 np.save('train_label', train_label)
